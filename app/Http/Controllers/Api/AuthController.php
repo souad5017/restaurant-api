@@ -30,6 +30,26 @@ class AuthController extends Controller
         ]);
     }
 
+    function login (Request $request){
+        $request->validate([
+            'email'=> 'required|email',
+            'password'=>'required|min:8'
+        ]);
 
+        $user = User::where('email' , $request->email)->first();
+
+        if(!$user || !Hash::check($request->password , $user->password)){
+            return response()->json([
+                'missage' => 'Invalid login credentials'
+            ]);
+        }
+
+        $token = $user->createToken('login-token')->plainTextToken;
+
+        return response()->json([
+            'token'=> $token,
+            'user'=> $user 
+        ]);
+    }
 }
 
