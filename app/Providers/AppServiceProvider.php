@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use App\Policies\CategoryPolicy;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,4 +27,9 @@ public function boot(): void
             ->middleware('api')
             ->group(base_path('routes/api.php'));
     }
+
+
+    protected $policies = [
+    Category::class => CategoryPolicy::class,
+];
 }

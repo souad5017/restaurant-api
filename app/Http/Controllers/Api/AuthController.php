@@ -13,13 +13,15 @@ class AuthController extends Controller
         $request->validate([
             'name'=> 'required|string|max:100',
             'email'=> 'required|email|unique:users',
-            'password'=> 'required|min:8'
+            'password'=> 'required|min:8',
+            'role' => 'admin'
         ]);
 
         $user = User::create([
             'name'=>$request->name ,
             'email'=>$request->email,
             'password'=> Hash::make($request->password)
+            
         ]) ;
 
         $token = $user->createToken('login-token')->plainTextToken;
@@ -64,6 +66,13 @@ class AuthController extends Controller
         
         return response()->json([
             'message' => 'Logged out successfully',
+        ]);
+    }
+
+
+    function user(Request $request){
+        return response()->json([
+            $request->user()
         ]);
     }
 }
