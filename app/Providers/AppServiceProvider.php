@@ -10,6 +10,10 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+
+    protected $policies = [
+        Category::class => CategoryPolicy::class,
+    ];
     /**
      * Register any application services.
      */
@@ -21,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-public function boot(): void
+    public function boot(): void
     {
         Route::prefix('api')
             ->middleware('api')
@@ -29,7 +33,5 @@ public function boot(): void
     }
 
 
-    protected $policies = [
-    Category::class => CategoryPolicy::class,
-];
+
 }

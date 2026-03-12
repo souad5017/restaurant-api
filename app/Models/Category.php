@@ -15,11 +15,6 @@ class Category extends Model
         'user_id', 
     ];
 
-    public function plats()
-    {
-        return $this->hasMany(Plat::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
