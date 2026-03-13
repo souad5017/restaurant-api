@@ -37,8 +37,9 @@ class PlatPolicy
      */
     public function update(User $user, Plat $plat): bool
     {
-        return false;
+        return $user->id === $plat->user_id || $user->role === 'admin';
     }
+
 
     /**
      * Determine whether the user can delete the model.
