@@ -66,6 +66,12 @@ class PlatController extends Controller
         ]);
     }
 
+        public function show(Plat $plat)
+    {
+        $this->authorize('view', $plat);
+        return response()->json($plat);
+    }
+
     public function storeByCategory(Request $request, Category $category)
     {
         $this->authorize('create', Plat::class); 
